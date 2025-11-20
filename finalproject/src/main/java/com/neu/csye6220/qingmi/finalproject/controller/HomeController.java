@@ -1,5 +1,6 @@
 package com.neu.csye6220.qingmi.finalproject.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,14 +9,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
     
     @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("message", "Welcome to Document Collaboration Platform!");
+    public String home(HttpSession session) {
+        // If user is logged in, redirect to dashboard
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            return "redirect:/dashboard";
+        }
         return "home/index";
     }
     
-    @GetMapping("/test")
-    public String test(Model model) {
-        model.addAttribute("status", "Spring Boot + JSP is working!");
-        return "home/test";
+    @GetMapping("/dashboard")
+    public String dashboard(HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("userId");
+        
+        if (userId == null) {
+            return "redirect:/users/login";
+        }
+        
+        String userName = (String) session.getAttribute("userName");
+        model.addAttribute("userName", userName);
+        
+        return "page/dashboard";
     }
 }
