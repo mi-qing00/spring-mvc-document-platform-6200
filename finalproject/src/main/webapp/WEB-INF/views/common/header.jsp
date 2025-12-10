@@ -9,6 +9,9 @@
                 <c:when test="${not empty sessionScope.userId}">
                     <a href="${pageContext.request.contextPath}/dashboard">Dashboard</a>
                     <a href="${pageContext.request.contextPath}/pages/search">Search</a>
+                    <a href="${pageContext.request.contextPath}/study/sessions">Study Sessions</a>
+                    <a href="${pageContext.request.contextPath}/flashcards">Flashcards</a>
+                    <a href="${pageContext.request.contextPath}/quizzes">Quizzes</a>
                     <a href="${pageContext.request.contextPath}/users/profile">Profile</a>
                     <form action="${pageContext.request.contextPath}/users/logout" method="post" style="display: inline;">
                         <button type="submit" style="background: none; border: none; color: #ffffff; cursor: pointer; font-size: 1rem; padding: 8px 16px; margin-left: 20px;">Logout</button>
